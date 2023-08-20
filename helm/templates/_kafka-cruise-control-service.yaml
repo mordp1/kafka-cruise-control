@@ -1,0 +1,21 @@
+{{- define "kafka-cruise-control-service" -}}
+{{- $cruise_control := . -}}
+---
+{{ range .Values.cruise_control_list }}
+{{- $container_name := printf "kafka-cruise-control_%s_%s" .config.application_name .config.environment | lower |replace "_" "-"| replace "*" "all" |replace "." "-" }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .config.application_name }}
+spec:
+  type: ClusterIP
+  ports:
+    - name: {{ .config.application_name }}
+      protocol: TCP
+      port: {{ $cruise_control.Values.service.port }}
+      targetPort: {{ $cruise_control.Values.service.targetPort }} 
+  selector:
+    app.kubernetes.io/name: {{ $container_name }}
+---
+{{- end }}
+{{- end }}

@@ -1,0 +1,6 @@
+apiVersion: v2
+appVersion: "1.0"
+description: "Cruise Control is a product that helps to balance the workload of Apache Kafka clusters at a large scale"
+type: application
+name: kafka-cruise-control
+version: 0.1.0

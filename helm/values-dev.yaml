@@ -1,0 +1,33 @@
+cruise_control_env: dev
+
+cruise_control_list:
+- memory_limit: 2048 #In megabytes (1 megabyte 1024kb) Min 256 :)
+  cpu_limit: 1000 #1000 = 1core
+  replicaCount: 1
+  config:
+    environment: dev
+    dc: aws-eu-central-1
+    application_name: kafka-log
+    bootstrap_servers: kafka01:9092
+    zookeeper_connect: zookeeper01:2181
+    instance_type: kafka.m5.xlarge
+    # Capacity unit used for disk is in MB, cpu is in number of cores, network throughput is in KB."
+    capacities_disk: 51200
+    capacities_num_cores: 4
+    capacities_nw_in: 5242880
+    capacities_nw_out: 5242880
+- memory_limit: 2048 #In megabytes (1 megabyte 1024kb) Min 256 :) 
+  cpu_limit: 1000 #1000 = 1core
+  replicaCount: 1
+  config:
+    environment: dev
+    dc: aws-eu-central-1
+    application_name: kafka-ms
+    bootstrap_servers: kafka-log01:9092
+    zookeeper_connect: zookeeper-log01:9092
+    instance_type: kafka.t3.small
+    # Capacity unit used for disk is in MB, cpu is in number of cores, network throughput is in KB."
+    capacities_disk: 81920
+    capacities_num_cores: 2
+    capacities_nw_in: 5242880
+    capacities_nw_out: 5242880

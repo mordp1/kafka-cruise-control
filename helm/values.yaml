@@ -1,0 +1,31 @@
+# From adobe/cruise-control
+image:
+  repository: adobe/cruise-control
+  tag: 2.5.124-adbe-20230730
+  pullPolicy: IfNotPresent
+
+# Global Configs
+team: Data
+application: kafka-cruise-control
+namespace: data-stream
+
+# Container Config
+cruise_control_nodeSelector: {}
+cruise_control_tolerations: []
+cruise_control_affinity: {}
+
+# Default Service Port
+service:
+  port: 8090
+  targetPort: 8090
+
+# It should be nice to check your DNS configuration and IngressClassName.
+ingress:
+  ingressClassName: nginx
+  annotations:
+    nginx.ingress.kubernetes.io/cors-allow-headers: >-
+      "DNT,X-CustomHeader,X-LANG,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,X-Api-Key,X-Device-Id,Access-Control-Allow-Origin"
+    nginx.ingress.kubernetes.io/cors-allow-methods: '"GET"'
+    nginx.ingress.kubernetes.io/cors-allow-origin: '"*"'
+    nginx.ingress.kubernetes.io/enable-cors: '"true"'
+    nginx.ingress.kubernetes.io/proxy-body-size: 200m
